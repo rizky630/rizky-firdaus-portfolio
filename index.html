@@ -1,0 +1,596 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portofolio pribadi Mochammad Rizky Firdaus, mahasiswa Teknik Informatika dan pengembang web.">
+  <title>Rizky Firdaus | Personal Portfolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    :root {
+      --bg: #08090c;
+      --surface: #101217;
+      --surface2: #151820;
+      --text: #f5f6fa;
+      --muted: #9298a5;
+      --line: rgba(255,255,255,.09);
+      --accent: #a5b4fc;
+      --accent2: #818cf8;
+      --radius: 20px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.7;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+
+    .container { width: min(1120px, 90%); margin: auto; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8,9,12,.88);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    nav {
+      min-height: 76px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 800;
+      font-size: 21px;
+      letter-spacing: -1px;
+    }
+
+    .logo span { color: var(--accent); }
+
+    .nav-links { display: flex; gap: 27px; list-style: none; }
+    .nav-links a { color: var(--muted); font-size: 13px; transition: .3s; }
+    .nav-links a:hover { color: var(--accent); }
+
+    .menu-btn {
+      display: none;
+      background: none;
+      border: 0;
+      color: white;
+      font-size: 23px;
+      cursor: pointer;
+    }
+
+    section { padding: 105px 0; scroll-margin-top: 75px; }
+
+    .hero {
+      min-height: 650px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 440px;
+      height: 440px;
+      background: #818cf8;
+      filter: blur(180px);
+      opacity: .13;
+      right: -120px;
+      top: 60px;
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; max-width: 790px; }
+
+    .eyebrow {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    h1, h2, h3 { font-family: 'Manrope', sans-serif; line-height: 1.2; }
+
+    h1 {
+      font-size: clamp(43px, 7vw, 76px);
+      letter-spacing: -4px;
+      margin-bottom: 22px;
+    }
+
+    h1 span {
+      background: linear-gradient(100deg,#c7d2fe,#818cf8);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-desc {
+      color: var(--muted);
+      max-width: 600px;
+      font-size: 16px;
+      margin-bottom: 32px;
+    }
+
+    .buttons { display: flex; flex-wrap: wrap; gap: 13px; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 13px 21px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 13px;
+      transition: .3s;
+    }
+
+    .btn-primary { background: var(--accent); color: #10111b; }
+    .btn-primary:hover { background: white; transform: translateY(-3px); }
+
+    .btn-outline { border: 1px solid var(--line); color: white; }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    .socials { display: flex; gap: 22px; margin-top: 37px; }
+    .socials a { color: var(--muted); font-size: 19px; transition: .3s; }
+    .socials a:hover { color: var(--accent); transform: translateY(-3px); }
+
+    .section-heading { margin-bottom: 43px; }
+    .section-heading h2 { font-size: clamp(30px,4vw,43px); letter-spacing: -1.5px; }
+    .section-heading p { color: var(--muted); margin-top: 12px; max-width: 570px; }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 45px;
+      align-items: center;
+    }
+
+    .profile-box {
+      min-height: 350px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: radial-gradient(circle at top right,rgba(129,140,248,.17),transparent 55%),var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .profile-placeholder {
+      text-align: center;
+      color: var(--accent);
+      font-size: 85px;
+    }
+
+    .profile-placeholder p { font-size: 12px; color: var(--muted); margin-top: 8px; }
+
+    .about-text p { color: var(--muted); margin-bottom: 17px; }
+    .info-list { margin-top: 24px; display: grid; gap: 13px; }
+
+    .info-item { display: flex; gap: 12px; font-size: 13px; }
+    .info-item strong { min-width: 105px; color: white; }
+    .info-item span { color: var(--muted); }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 25px;
+      transition: .3s;
+    }
+
+    .card:hover { transform: translateY(-5px); border-color: rgba(165,180,252,.45); }
+
+    .card-icon {
+      width: 45px;
+      height: 45px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: rgba(165,180,252,.1);
+      color: var(--accent);
+      font-size: 19px;
+      margin-bottom: 22px;
+    }
+
+    .card h3 { font-size: 17px; margin-bottom: 11px; }
+    .card p { color: var(--muted); font-size: 13px; }
+
+    .skill-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    .skill {
+      padding: 7px 12px;
+      background: var(--surface2);
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      font-size: 11px;
+      color: #c9cce0;
+    }
+
+    .project-card {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .project-image {
+      height: 175px;
+      background: linear-gradient(135deg,#171c31,#292e50);
+      display: grid;
+      place-items: center;
+      color: var(--accent);
+      font-size: 55px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .project-body { padding: 23px; }
+    .project-body h3 { margin-bottom: 10px; }
+    .project-body p { min-height: 67px; }
+    .project-link { display: inline-flex; gap: 8px; color: var(--accent); font-size: 12px; font-weight: 700; margin-top: 18px; }
+
+    .timeline { border-left: 1px solid rgba(165,180,252,.4); margin-left: 8px; padding-left: 28px; }
+    .timeline-item { position: relative; margin-bottom: 30px; }
+    .timeline-item::before {
+      content: "";
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--accent);
+      position: absolute;
+      left: -34px;
+      top: 6px;
+    }
+    .timeline-item h3 { font-size: 17px; }
+    .timeline-item p { color: var(--muted); font-size: 13px; margin-top: 7px; }
+
+    .contact-box {
+      text-align: center;
+      background: radial-gradient(circle at top,rgba(129,140,248,.14),transparent 70%),var(--surface);
+      border: 1px solid var(--line);
+      padding: 55px 25px;
+      border-radius: 25px;
+    }
+
+    .contact-box h2 { font-size: clamp(29px,4vw,42px); }
+    .contact-box p { color: var(--muted); margin: 15px auto 27px; max-width: 500px; }
+
+    footer { padding: 27px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 15px; flex-wrap: wrap; }
+
+    @media(max-width:800px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 76px;
+        left: 0;
+        width: 100%;
+        background: #101217;
+        padding: 24px 5%;
+        flex-direction: column;
+        gap: 19px;
+        border-bottom: 1px solid var(--line);
+      }
+      .nav-links.active { display: flex; }
+      .menu-btn { display: block; }
+      .about-grid { grid-template-columns: 1fr; }
+      .cards { grid-template-columns: repeat(2,1fr); }
+      section { padding: 75px 0; }
+    }
+
+    @media(max-width:520px) {
+      h1 { letter-spacing: -2.5px; }
+      .cards { grid-template-columns: 1fr; }
+      .hero { min-height: 570px; }
+      .profile-box { min-height: 260px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <nav class="container">
+    <a href="#home" class="logo">RIZKY<span>.</span></a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Beranda</a></li>
+      <li><a href="#about">Tentang</a></li>
+      <li><a href="#education">Pendidikan</a></li>
+      <li><a href="#skills">Keahlian</a></li>
+      <li><a href="#projects">Proyek</a></li>
+      <li><a href="#contact">Kontak</a></li>
+    </ul>
+
+    <button class="menu-btn" id="menuBtn" aria-label="Buka menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-content">
+        <p class="eyebrow">Selamat datang di portofolio saya</p>
+        <h1>Halo, saya <span>Rizky Firdaus.</span></h1>
+        <p class="hero-desc">
+          Mahasiswa Teknik Informatika yang memiliki ketertarikan
+          pada pengembangan website, teknologi informasi, dan
+          pembuatan solusi digital yang bermanfaat.
+        </p>
+        <div class="buttons">
+          <a href="#projects" class="btn btn-primary">Lihat Proyek <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#contact" class="btn btn-outline">Hubungi Saya</a>
+        </div>
+        <div class="socials">
+          <a href="https://github.com/" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="https://instagram.com/" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="mailto:emailkamu@example.com" aria-label="Email"><i class="fa-regular fa-envelope"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <div class="section-heading">
+        <p class="eyebrow">01 / Tentang Saya</p>
+        <h2>Mengenal Lebih Dekat</h2>
+      </div>
+
+      <div class="about-grid">
+        <div class="profile-box">
+          <!-- Ganti area ini dengan foto profil kamu -->
+          <div class="profile-placeholder">
+            <i class="fa-solid fa-user-astronaut"></i>
+            <p>Foto profil akan ditambahkan</p>
+          </div>
+        </div>
+
+        <div class="about-text">
+          <p>
+            Perkenalkan, saya Mochammad Rizky Firdaus, mahasiswa
+            Program Studi Teknik Informatika di Universitas
+            Muhammadiyah Cirebon.
+          </p>
+          <p>
+            Saya memiliki ketertarikan dalam dunia teknologi,
+            khususnya pengembangan website, pemrograman, basis data,
+            dan pengembangan sistem informasi.
+          </p>
+          <p>
+            Melalui berbagai proyek perkuliahan, saya terus
+            mengembangkan kemampuan teknis, kreativitas, serta
+            pengalaman dalam menyelesaikan permasalahan menggunakan teknologi.
+          </p>
+
+          <div class="info-list">
+            <div class="info-item"><strong>Nama</strong><span>Mochammad Rizky Firdaus</span></div>
+            <div class="info-item"><strong>NIM</strong><span>240511051</span></div>
+            <div class="info-item"><strong>Program Studi</strong><span>Teknik Informatika</span></div>
+            <div class="info-item"><strong>Universitas</strong><span>Universitas Muhammadiyah Cirebon</span></div>
+            <div class="info-item"><strong>Kelas</strong><span>TI 24B</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="container">
+      <div class="section-heading">
+        <p class="eyebrow">02 / Pendidikan</p>
+        <h2>Perjalanan Pendidikan</h2>
+        <p>Riwayat pendidikan dan perjalanan akademik saya.</p>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <h3>Universitas Muhammadiyah Cirebon</h3>
+          <p>Program Studi Teknik Informatika · Sedang menempuh pendidikan</p>
+        </div>
+        <div class="timeline-item">
+          <h3>Pendidikan Sebelumnya</h3>
+          <p>Informasi sekolah sebelumnya akan ditambahkan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="container">
+      <div class="section-heading">
+        <p class="eyebrow">03 / Keahlian</p>
+        <h2>Teknologi & Kemampuan</h2>
+        <p>Teknologi yang saya pelajari dan gunakan dalam pengerjaan proyek.</p>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon"><i class="fa-solid fa-code"></i></div>
+          <h3>Web Development</h3>
+          <p>Dasar pengembangan website dan antarmuka pengguna.</p>
+          <div class="skill-list">
+            <span class="skill">HTML</span>
+            <span class="skill">CSS</span>
+            <span class="skill">JavaScript</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-icon"><i class="fa-solid fa-database"></i></div>
+          <h3>Database</h3>
+          <p>Perancangan basis data, pengelolaan tabel, dan query SQL.</p>
+          <div class="skill-list">
+            <span class="skill">MySQL</span>
+            <span class="skill">Supabase</span>
+            <span class="skill">SQL</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-icon"><i class="fa-brands fa-python"></i></div>
+          <h3>Programming</h3>
+          <p>Pemrograman dasar dan pengembangan aplikasi menggunakan Python.</p>
+          <div class="skill-list">
+            <span class="skill">Python</span>
+            <span class="skill">VS Code</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container">
+      <div class="section-heading">
+        <p class="eyebrow">04 / Proyek</p>
+        <h2>Karya & Proyek Saya</h2>
+        <p>Beberapa proyek yang pernah saya kerjakan dalam proses pembelajaran dan pengembangan kemampuan.</p>
+      </div>
+
+      <div class="cards">
+        <article class="card project-card">
+          <div class="project-image"><i class="fa-solid fa-motorcycle"></i></div>
+          <div class="project-body">
+            <h3>MotoGP Heritage</h3>
+            <p>Proyek arsip digital yang menyajikan sejarah MotoGP, pembalap legendaris, motor, teknologi, dan sirkuit.</p>
+            <div class="skill-list">
+              <span class="skill">HTML</span>
+              <span class="skill">CSS</span>
+              <span class="skill">JavaScript</span>
+              <span class="skill">Supabase</span>
+            </div>
+            <a class="project-link" href="https://github.com/" target="_blank">Lihat proyek <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>
+        </article>
+
+        <article class="card project-card">
+          <div class="project-image"><i class="fa-solid fa-boxes-stacked"></i></div>
+          <div class="project-body">
+            <h3>Sistem Informasi Gudang</h3>
+            <p>Aplikasi pengelolaan data barang, stok, pemasok, dan barang masuk menggunakan Python dan MySQL.</p>
+            <div class="skill-list">
+              <span class="skill">Python</span>
+              <span class="skill">MySQL</span>
+            </div>
+            <a class="project-link" href="https://github.com/" target="_blank">Lihat proyek <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>
+        </article>
+
+        <article class="card project-card">
+          <div class="project-image"><i class="fa-solid fa-book-open"></i></div>
+          <div class="project-body">
+            <h3>Perancangan Database Perpustakaan</h3>
+            <p>Perancangan basis data perpustakaan yang mencakup anggota, buku, petugas, peminjaman, dan denda.</p>
+            <div class="skill-list">
+              <span class="skill">Database</span>
+              <span class="skill">MySQL</span>
+              <span class="skill">ERD</span>
+            </div>
+            <a class="project-link" href="#contact">Informasi proyek <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="container">
+      <div class="section-heading">
+        <p class="eyebrow">05 / Pengalaman</p>
+        <h2>Pengalaman & Aktivitas</h2>
+        <p>Aktivitas akademik dan pengalaman dalam proses pengembangan kemampuan.</p>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <h3>Pengembangan Proyek MotoGP Heritage</h3>
+          <p>Mengerjakan proyek website arsip digital sebagai bagian dari proses pembelajaran dan pengembangan sistem informasi.</p>
+        </div>
+        <div class="timeline-item">
+          <h3>Proyek Pemrograman dan Basis Data</h3>
+          <p>Mengembangkan aplikasi sederhana dan melakukan perancangan serta pengelolaan basis data melalui tugas perkuliahan.</p>
+        </div>
+        <div class="timeline-item">
+          <h3>Pengembangan Kompetensi Akademik</h3>
+          <p>Mempelajari teknologi informasi, pemrograman, jaringan komputer, dan pengembangan sistem.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="contact-box">
+        <p class="eyebrow">06 / Hubungi Saya</p>
+        <h2>Mari Terhubung!</h2>
+        <p>Terima kasih telah mengunjungi portofolio saya. Saya terbuka untuk berdiskusi, berbagi ide, dan menjalin koneksi.</p>
+        <a href="mailto:emailkamu@example.com" class="btn btn-primary">
+          <i class="fa-regular fa-envelope"></i> Kirim Email
+        </a>
+        <div class="socials" style="justify-content:center">
+          <a href="https://github.com/" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="https://instagram.com/" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <span>© <span id="year"></span> Mochammad Rizky Firdaus.</span>
+    <span>Dibuat dengan semangat belajar dan kreativitas.</span>
+  </div>
+</footer>
+
+<script>
+  const menuBtn = document.getElementById("menuBtn");
+  const navLinks = document.getElementById("navLinks");
+
+  menuBtn.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+    menuBtn.innerHTML = navLinks.classList.contains("active")
+      ? '<i class="fa-solid fa-xmark"></i>'
+      : '<i class="fa-solid fa-bars"></i>';
+  });
+
+  document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", () => {
+      navLinks.classList.remove("active");
+      menuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+    });
+  });
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
